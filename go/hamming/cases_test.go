@@ -64,4 +64,10 @@ var testCases = []struct {
 		0,
 		true,
 	},
+	{ // non-ascii char
+		"Œ",
+		"Œ",
+		0,
+		false,
+	},
 }
