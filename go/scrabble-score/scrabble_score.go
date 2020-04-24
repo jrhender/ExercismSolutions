@@ -35,11 +35,8 @@ var scores = map[rune]int{
 // Score provides the scrabble score for a word
 func Score(word string) int {
 	points := 0
-	word = strings.ToLower(word)
-	r := []rune(word)
-	for i := 0; i < len(r); i++ {
-		l := r[i]
-		points += scores[l]
+	for _, r := range strings.ToLower(word) {
+		points += scores[r]
 	}
 	return points
 }
