@@ -1,16 +1,27 @@
+// Package luhn provides functions relating to luhn numbers
 package luhn
 
-import "strings"
+import (
+	"strings"
+	"unicode"
+)
 
 // Valid returns true if input string is a valid luhn number
 func Valid(input string) bool {
-	input = strings.TrimSpace(input)
+	input = strings.ReplaceAll(input, " ", "")
 	sum := 0
-	for i := 1; i <= len(input); i++ { //De
-		j := len(input) - i
-		s := input[j]
-		digit := int(s)
-		if j%2 == 0 {
+	runes := []rune(input)
+	l := len(runes)
+	if l <= 1 {
+		return false
+	}
+	for i := 1; i <= l; i++ {
+		s := runes[l-i]
+		if unicode.IsDigit(s) == false {
+			return false
+		}
+		digit := int(s - '0') //ASCII digit codes are sequential from 0, so subtract 0 rune value to get digit
+		if i%2 == 0 {
 			digit = digit * 2
 			if digit > 9 {
 				digit = digit - 9
