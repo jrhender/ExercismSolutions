@@ -15,19 +15,22 @@ func Valid(input string) bool {
 	if l <= 1 {
 		return false
 	}
+	evenIndex := false // Initialize as false because we're starting at 1 in the loop below
 	for i := 1; i <= l; i++ {
 		s := runes[l-i]
 		if unicode.IsDigit(s) == false {
 			return false
 		}
 		digit := int(s - '0') //ASCII digit codes are sequential from 0, so subtract 0 rune value to get digit
-		if i%2 == 0 {
-			digit = digit * 2
+		if evenIndex {
+			digit *= 2
 			if digit > 9 {
-				digit = digit - 9
+				digit -= 9
 			}
 		}
 		sum += digit
+		evenIndex = !evenIndex
+
 	}
 	if sum%10 == 0 {
 		return true
