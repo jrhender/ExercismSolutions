@@ -14,11 +14,7 @@ func Valid(input string) bool {
 		return false
 	}
 
-	evenIndex := false
-	if len(input)%2 == 0 {
-		evenIndex = true // Set to true because last number from right to left is even
-	}
-
+	evenIndex := len(input)%2 == 0 // Set to true if last number from right to left is even
 	sum := 0
 	for _, r := range input {
 		if unicode.IsDigit(r) == false {
