@@ -10,13 +10,12 @@ func Square(chessboardSquare int) (uint64, error) {
 		return 0, errors.New("input out of range")
 	}
 	n := uint8(chessboardSquare)
-	result := uint64(1 << (n - 1))
-	return result, nil
+	return 1 << (n - 1), nil
 }
 
 // Total return the total number of grains on the 64 square chessboard
 func Total() uint64 {
 	// A uint64 with all 1 bits is the total.
 	// Effectively, each bit represents a square on the chessboard
-	return ^uint64(0)
+	return 1<<64 - 1
 }
