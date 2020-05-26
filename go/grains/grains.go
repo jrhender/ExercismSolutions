@@ -5,12 +5,11 @@ import (
 )
 
 // Square returns the number of grains on a given square of the chessboard (i.e. 2^(n-1))
-func Square(chessboardSquare int) (uint64, error) {
-	if chessboardSquare < 1 || chessboardSquare > 64 {
+func Square(square int) (uint64, error) {
+	if square < 1 || square > 64 {
 		return 0, errors.New("input out of range")
 	}
-	n := uint8(chessboardSquare)
-	return 1 << (n - 1), nil
+	return 1 << (square - 1), nil
 }
 
 // Total return the total number of grains on the 64 square chessboard
