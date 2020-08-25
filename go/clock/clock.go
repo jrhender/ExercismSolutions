@@ -9,10 +9,10 @@ func New(hour, minute int) Clock {
 		hour = hour + 24
 	}
 	minute = minute % (24 * 60)
-	if minute < 0 {
-		minute = minute + (24 * 60)
-	}
 	totalMinutes := hour*60 + minute
+	if totalMinutes < 0 {
+		totalMinutes = totalMinutes + (24 * 60)
+	}
 	return Clock{totalMinutes}
 }
 
