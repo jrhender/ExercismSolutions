@@ -14,17 +14,12 @@ func New(hour, minute int) Clock {
 
 // Subtract removes minutes from a clock
 func (c Clock) Subtract(minutes int) Clock {
-	c.Minutes = (c.Minutes - minutes) % (24 * 60)
-	if c.Minutes < 0 {
-		c.Minutes = c.Minutes + (24 * 60)
-	}
-	return c
+	return New(0, c.Minutes-minutes)
 }
 
 // Add adds minutes to a clock
 func (c Clock) Add(minutes int) Clock {
-	c.Minutes = (c.Minutes + minutes) % (24 * 60)
-	return c
+	return New(0, c.Minutes+minutes)
 }
 
 // String returns clock value in 24 hour notation
