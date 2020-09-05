@@ -4,16 +4,12 @@ import "fmt"
 
 // New constructs new Clock
 func New(hour, minute int) Clock {
-	hour = hour % 24
-	if hour < 0 {
-		hour = hour + 24
+	m := minute + hour*60
+	m %= 24 * 60
+	if m < 0 {
+		m += 24 * 60
 	}
-	minute = minute % (24 * 60)
-	totalMinutes := hour*60 + minute
-	if totalMinutes < 0 {
-		totalMinutes = totalMinutes + (24 * 60)
-	}
-	return Clock{totalMinutes}
+	return Clock{m}
 }
 
 // Subtract removes minutes from a clock
