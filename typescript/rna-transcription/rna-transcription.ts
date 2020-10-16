@@ -5,16 +5,16 @@ class Transcriptor {
                 .map(nucleotide => this.transcriptNucleotide(nucleotide))
                 .join('');
     }
-    
-    private DNAtoRNA:Map<string, string> = new Map([
-        ['G', 'C'],
-        ['C', 'G'],
-        ['T', 'A'],
-        ['A', 'U']
-    ]);
+
+    private DNAtoRNA: Record<string, string> = {
+        G: 'C',
+        C: 'G',
+        T: 'A',
+        A: 'U'
+    };
 
     private transcriptNucleotide(nucleotide: string) {
-        const rna = this.DNAtoRNA.get(nucleotide)
+        const rna = this.DNAtoRNA[nucleotide]
         if (!rna) {
             throw 'Invalid input DNA.'
         }
