@@ -1,5 +1,3 @@
-import { runInThisContext } from "vm";
-
 class SpaceAge {
     readonly seconds: number;
     readonly secondsInEarthYear: number = 31557600;
