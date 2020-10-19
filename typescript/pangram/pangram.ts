@@ -1,12 +1,11 @@
-import { stringify } from "querystring";
-
 class Pangram {
     constructor(private readonly input: string) {}
 
     isPangram() {
         const letters = new Set<string>();
-        // 97 is ascii code for the letter 'a'
-        for (let i = 97; i < 97 + 26; i++) {
+        const firstCharCode = ('a' as String).charCodeAt(0);
+        const numLettersInAlphabet = 26
+        for (let i = firstCharCode; i < firstCharCode + numLettersInAlphabet; i++) {
             letters.add(String.fromCharCode(i))
         }
 
