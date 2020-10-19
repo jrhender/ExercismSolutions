@@ -4,9 +4,11 @@ class SpaceAge {
     constructor(readonly seconds: number) {}
 
     private calculateAge(orbitalPeriodInEarthYears: number): () => number {
-        const secondsInOneYear: number = this.secondsInEarthYear * orbitalPeriodInEarthYears;
-        const age: number = this.seconds/secondsInOneYear;
-        return () => parseFloat(age.toFixed(2));
+        return () => {
+            const secondsInOneYear: number = this.secondsInEarthYear * orbitalPeriodInEarthYears;
+            const age: number = this.seconds/secondsInOneYear;
+            return parseFloat(age.toFixed(2));
+        }
     }
 
     onEarth = this.calculateAge(1);
