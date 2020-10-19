@@ -9,6 +9,7 @@ class Pangram {
         for (let i = 97; i < 97 + 26; i++) {
             letters.set(String.fromCharCode(i), false)
         }
+        
         for (const c of this.input.toLowerCase()) {
             letters.delete(c);
         }
