@@ -2,17 +2,19 @@ class Pangram {
     constructor(private readonly input: string) {}
 
     isPangram() {
-        const letters = new Set<string>();
-        const firstCharCode = ('a' as String).charCodeAt(0);
+        const letters = new Map<string, boolean>();
+        const firstCharCode = 'a'.charCodeAt(0);
         const numLettersInAlphabet = 26
         for (let i = firstCharCode; i < firstCharCode + numLettersInAlphabet; i++) {
-            letters.add(String.fromCharCode(i))
+            letters.set(String.fromCharCode(i), false)
         }
 
         for (const c of this.input.toLowerCase()) {
-            letters.delete(c);
+            if (letters.has(c)) {
+                letters.set(c, true)
+            }
         }
-        return letters.size == 0
+        return [...letters].filter(l => l[1] == false).length == 0
     }
 }
 
