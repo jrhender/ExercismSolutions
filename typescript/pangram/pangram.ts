@@ -5,6 +5,7 @@ class Pangram {
 
     isPangram() {
         const letters = new Set<string>();
+        // 97 is ascii code for the letter 'a'
         for (let i = 97; i < 97 + 26; i++) {
             letters.add(String.fromCharCode(i))
         }
