@@ -1,18 +1,18 @@
 class Bob {
-    hey(input: string) {
+    hey(input: string): BobReplies {
         const trimmedInput = input.trim();
         const isYelling = this.isYelling(trimmedInput);
-        const isQuestion = this.isQuestion(trimmedInput);
+        const isQuestion = trimmedInput.endsWith("?")
         if (isYelling && isQuestion) {
             return "Calm down, I know what I'm doing!";
         }
-        else if (isYelling) {
+        if (isYelling) {
             return "Whoa, chill out!";
         }
-        else if (isQuestion) {
+        if (isQuestion) {
             return "Sure.";
         }
-        else if (trimmedInput === "") {
+        if (trimmedInput === "") {
             return "Fine. Be that way!";
         }
         return "Whatever."
@@ -20,12 +20,15 @@ class Bob {
 
     private isYelling(input: string): boolean {
         const lettersOnly = input.replace(/[^a-z]/gi, '');
-        return lettersOnly.length == 0 ? false : lettersOnly === lettersOnly.toUpperCase();
-    }
-
-    private isQuestion(input: string): boolean {
-        return input[input.length-1] === "?";
+        return lettersOnly.length > 0 && lettersOnly === lettersOnly.toUpperCase();
     }
 }
+
+type BobReplies =
+    "Calm down, I know what I'm doing!" |
+    "Whoa, chill out!" |
+    "Sure." |
+    "Fine. Be that way!" |
+    "Whatever."
 
 export default Bob
