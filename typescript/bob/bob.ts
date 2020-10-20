@@ -1,8 +1,8 @@
 class Bob {
     hey(input: string) {
-        const isYelling = this.isYelling(input);
         const trimmedInput = input.trim();
-        const isQuestion = trimmedInput[trimmedInput.length-1] === "?";
+        const isYelling = this.isYelling(trimmedInput);
+        const isQuestion = this.isQuestion(trimmedInput);
         if (isYelling && isQuestion) {
             return "Calm down, I know what I'm doing!";
         }
@@ -21,6 +21,10 @@ class Bob {
     private isYelling(input: string): boolean {
         const lettersOnly = input.replace(/[^a-z]/gi, '');
         return lettersOnly.length == 0 ? false : lettersOnly === lettersOnly.toUpperCase();
+    }
+
+    private isQuestion(input: string): boolean {
+        return input[input.length-1] === "?";
     }
 }
 
