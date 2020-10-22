@@ -1,15 +1,16 @@
 class Matrix {
     constructor(matrixDescription: string) {
-        const rows = matrixDescription.split('\n')
-        for (const row of rows) {
-            const values = row.split(" ").map(s => parseInt(s))
-            this.rows.push(values)
-        }
-        this.columns = this.transpose(this.rows);
+        const stringMatrix = matrixDescription.split('\n').map(r => r.split(" "))
+        this.rows = this.convertToNumberMatrix(stringMatrix)
+        this.columns = this.transpose(this.rows)
     }
 
-    readonly rows: number[][] = new Array<number[]>()
+    readonly rows: number[][]
     readonly columns: number[][]
+
+    private convertToNumberMatrix(matrix: string[][]): number[][] {
+        return matrix.map(r => r.map(c => parseInt(c)))
+    }
 
     private transpose(matrix: number[][]): number[][] {
         return matrix[0].map((_, i) => matrix.map(row => row[i]));
