@@ -23,14 +23,15 @@ class Robot {
     // getName approach is inspired by hex to decimal conversion
     private getName(source: number) {
         const convertToLetter = (n: number) => String.fromCharCode(n + 65)
-        const firstLetter = convertToLetter(source%26)
-        const firstQuotient = Math.floor(source/26) 
-        const secondLetter = convertToLetter(firstQuotient%26)
-        const secondQuotient = Math.floor(firstQuotient/26)
+        const firstLetter = convertToLetter(source%this.alphabetSize)
+        const firstQuotient = Math.floor(source/this.alphabetSize) 
+        const secondLetter = convertToLetter(firstQuotient%this.alphabetSize)
+        const secondQuotient = Math.floor(firstQuotient/this.alphabetSize)
         const number = ('00' + secondQuotient%this.mameMaximumNumber).slice(-3)
         return firstLetter + secondLetter + number 
     }
 
+    // getRandomNum selects and removes a random number from an array
     private getRandomNum(possibleNumbers: Array<number>): {possibleNumbers: Array<number>, newNumber: number} {
         const newNumber = possibleNumbers.splice(Math.floor(Math.random() * (possibleNumbers.length-1)), 1)[0]
         return {possibleNumbers, newNumber}
