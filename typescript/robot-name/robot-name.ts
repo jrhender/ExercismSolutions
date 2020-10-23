@@ -1,35 +1,35 @@
-import { stringify } from "querystring";
-
 class Robot {
-    private readonly usedNames = new Set<string>()
+    private availableNumbers = Array.from({length: 26*26*1000}, (_, i) => i + 100)
 
     constructor() {
         this.name = this.getNewName()
-        this.usedNames.add(this.name)
     }
 
     name: string
 
     resetName() {
-        while (true) {
-            const newName = this.getNewName()
-            if (!this.usedNames.has(newName)) {
-                this.name = newName
-                this.usedNames.add(newName)
-                break
-            }
-        }
+        this.name = this.getNewName()
     }
 
     private getNewName(): string {
-        const firstLetter = String.fromCharCode(this.getRandomNum(26) + 65)
-        const secondLetter = String.fromCharCode(this.getRandomNum(26) + 65)
-        const number = this.getRandomNum(1000)
+        const {possibleNumbers, newNumber} = this.getRandomNum(this.availableNumbers)
+        this.availableNumbers = possibleNumbers
+        return this.getName(newNumber)
+    }
+
+    private getName(source: number) {
+        const convertToLetter = (n: number) => String.fromCharCode(n + 65)
+        const firstLetter = convertToLetter(source%26)
+        const firstQuotient = Math.floor(source/26) 
+        const secondLetter = convertToLetter(firstQuotient%26)
+        const secondQuotient = Math.floor(firstQuotient/26)
+        const number = secondQuotient%1000
         return firstLetter + secondLetter + number 
     }
 
-    private getRandomNum(max: number ): number {
-        return Math.floor(Math.random() * max);
+    private getRandomNum(possibleNumbers: Array<number>): {possibleNumbers: Array<number>, newNumber: number} {
+        const newNumber = possibleNumbers.splice(Math.floor(Math.random() * (possibleNumbers.length-1)), 1)[0]
+        return {possibleNumbers, newNumber}
     }
 }
 
