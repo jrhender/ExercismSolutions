@@ -4,9 +4,7 @@ class Robot {
     private readonly mameMaximumNumber = 999
 
     // availableNumbers are used to keep track of numbers which have been used
-    private availableNumbers = Array.from(
-        {length: this.alphabetSize*this.alphabetSize*this.mameMaximumNumber},
-        (_, i) => i)
+    private availableNumbers = [...Array(this.alphabetSize*this.alphabetSize*this.mameMaximumNumber).keys()]
 
     name = this.getNewName()
 
