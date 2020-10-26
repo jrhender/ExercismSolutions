@@ -1,4 +1,4 @@
-// Approach used is to view the "name" as a number between 100 and (26*26*999 - 100)
+// Approach used is to view the "name" as an encoded number between 0 and 26*26*999
 class Robot {
     private readonly alphabetSize = 26
     private readonly mameMaximumNumber = 999
