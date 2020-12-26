@@ -1,2 +1,4 @@
 .exercism/
 node_modules
+*.out
+tests.out.dSYM/
