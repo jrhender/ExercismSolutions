@@ -1,12 +1,11 @@
 #include "armstrong_numbers.h"
-#include <math.h>
 
 bool is_armstrong_number(int candidate)
 {
     int quotient;
 
     // Get count
-    double count = 0;
+    int count = 0;
     quotient = candidate;
     while (quotient > 0)
     {
@@ -15,14 +14,31 @@ bool is_armstrong_number(int candidate)
     }
 
     // Sum exponentiated digits
-    double sum = 0;
+    int sum = 0;
     quotient = candidate;
     while (quotient > 0)
     {
         int digit = quotient % 10;
-        sum += pow( (double) digit, count);
+        sum += ipow(digit, count);
         quotient /= 10;
     }
     
-    return (double) candidate == sum;
+    return candidate == sum;
+}
+
+// An integer power function
+int ipow(int base, int exp)
+{
+    int result = 1;
+    for (;;)
+    {
+        if (exp & 1)
+            result *= base;
+        exp >>= 1;
+        if (!exp)
+            break;
+        base *= base;
+    }
+
+    return result;
 }
