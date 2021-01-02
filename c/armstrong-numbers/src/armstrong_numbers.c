@@ -2,28 +2,32 @@
 
 bool is_armstrong_number(int candidate)
 {
-    int quotient;
+    int count = count_digits(candidate);
+    int sum = sum_exponentiated_digits(candidate, count);
+    return candidate == sum;
+}
 
-    // Get count
+// Returns number of digits in subject
+int count_digits(int subject) {
     int count = 0;
-    quotient = candidate;
-    while (quotient > 0)
+    while (subject > 0)
     {
-        quotient /= 10;
+        subject /= 10;
         count++;
     }
+    return count;
+}
 
-    // Sum exponentiated digits
+// Returns sum of each digit in subject exponentiated the a given power
+int sum_exponentiated_digits(int subject, int exp) {
     int sum = 0;
-    quotient = candidate;
-    while (quotient > 0)
+    while (subject > 0)
     {
-        int digit = quotient % 10;
-        sum += ipow(digit, count);
-        quotient /= 10;
+        int digit = subject % 10;
+        sum += ipow(digit, exp);
+        subject /= 10;
     }
-    
-    return candidate == sum;
+    return sum;
 }
 
 // An integer power function
